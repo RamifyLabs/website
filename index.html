@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ramify: Finding your unknown knowns</title>
+<meta name="description" content="Unrealized insights implied by what you already know. Coming soon.">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://ramifylabs.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ramifylabs.com/">
+<meta property="og:site_name" content="Ramify">
+<meta property="og:title" content="Ramify: Finding your unknown knowns">
+<meta property="og:description" content="Unrealized insights implied by what you already know. Coming soon.">
+<meta property="og:image" content="https://ramifylabs.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Terminal reading: ramify. Automated insightmaxxing. Coming soon.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ramify: Finding your unknown knowns">
+<meta name="twitter:description" content="Unrealized insights implied by what you already know. Coming soon.">
+<meta name="twitter:image" content="https://ramifylabs.com/og.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000'/%3E%3Crect x='4' y='3' width='8' height='10' fill='%23fff'/%3E%3C/svg%3E">
+<script>
+  // Hide the text until the typing script has prepared it, but only when motion is allowed.
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.className = 'typing-pending';
+</script>
+<style>
+  html, body { height: 100%; margin: 0; }
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    color-scheme: dark;
+  }
+  body {
+    background: #000;
+    color: #fff;
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", "Liberation Mono", monospace;
+    font-size: clamp(15px, 2.2vw, 20px);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    min-height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+  }
+  .term { max-width: 60ch; text-align: left; }
+  .term p, .term h1 { margin: 0; font: inherit; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .prompt { color: #6b6b6b; }
+  a { color: inherit; text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  .cursor {
+    display: inline-block;
+    width: 0.6em;
+    height: 1.1em;
+    background: #fff;
+    vertical-align: -0.15em;
+  }
+  .typing-pending .term { visibility: hidden; }
+  .ch, .pending-prompt { visibility: hidden; }
+  .ch.on, .pending-prompt.on { visibility: visible; }
+  .cursor.moving { margin-right: -0.6em; }
+  @media (prefers-reduced-motion: no-preference) {
+    .cursor:not(.solid) { animation: blink 1.06s steps(1, end) infinite; }
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="term">
+    <p data-line="cmd"><span class="prompt" aria-hidden="true">$ </span><span aria-label="Ramify">ramify</span></p>
+    <h1 data-line="out">Automated insightmaxxing.</h1>
+    <p data-line="out">Finding your unknown knowns:</p>
+    <p data-line="out">unrealized insights implied by what you already know.</p>
+    <p data-line="out">Coming soon.</p>
+    <p data-line="out"><a href="mailto:contact@ramifylabs.com">contact@ramifylabs.com</a></p>
+    <p data-line="prompt" aria-hidden="true"><span class="prompt">$ </span><span class="cursor"></span></p>
+  </div>
+</main>
+<script>
+(function () {
+  var root = document.documentElement;
+  if (root.className !== 'typing-pending') return;
+
+  var term = document.querySelector('.term');
+  var cursor = term.querySelector('.cursor');
+  var lines = [].slice.call(term.querySelectorAll('[data-line]'));
+  var steps = [];
+
+  // Wrap every character in a hidden span, and queue one reveal step per character.
+  lines.forEach(function (line) {
+    var kind = line.getAttribute('data-line');
+    var prompt = line.querySelector('.prompt');
+    if (prompt) prompt.classList.add('pending-prompt');
+
+    var texts = [];
+    var walker = document.createTreeWalker(line, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) {
+      var n = walker.currentNode;
+      if (!(prompt && prompt.contains(n))) texts.push(n);
+    }
+
+    var lineSteps = [];
+    texts.forEach(function (node) {
+      var frag = document.createDocumentFragment();
+      node.nodeValue.split('').forEach(function (c) {
+        var s = document.createElement('span');
+        s.className = 'ch';
+        s.textContent = c;
+        frag.appendChild(s);
+        lineSteps.push(s);
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
+
+    steps.push({ line: line, prompt: prompt, kind: kind, chars: lineSteps });
+  });
+
+  root.className = '';
+
+  function place(afterEl, container) {
+    if (afterEl) afterEl.parentNode.insertBefore(cursor, afterEl.nextSibling);
+    else container.appendChild(cursor);
+  }
+
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  function finish() {
+    // Put plain text back so the finished page is ordinary, readable markup.
+    [].slice.call(term.querySelectorAll('.ch')).forEach(function (s) {
+      s.parentNode.replaceChild(document.createTextNode(s.textContent), s);
+    });
+    [].slice.call(term.querySelectorAll('.pending-prompt')).forEach(function (p) {
+      p.classList.remove('pending-prompt', 'on');
+    });
+    term.normalize();
+    var last = lines[lines.length - 1];
+    last.appendChild(cursor);
+    cursor.classList.remove('solid', 'moving');
+  }
+
+  async function run() {
+    for (var i = 0; i < steps.length; i++) {
+      var st = steps[i];
+      if (st.prompt) {
+        st.prompt.classList.add('on');
+        place(st.prompt, st.line);
+      }
+      if (st.kind === 'cmd') {
+        cursor.classList.remove('solid');
+        await wait(900);                       // a beat at the prompt before typing
+        cursor.classList.add('solid', 'moving');
+        for (var c = 0; c < st.chars.length; c++) {
+          st.chars[c].classList.add('on');
+          place(st.chars[c]);
+          await wait(80 + Math.random() * 110); // human typing cadence
+        }
+        cursor.classList.remove('solid');
+        await wait(420);                        // "enter"
+        cursor.classList.add('solid');
+      } else if (st.kind === 'out') {
+        for (var k = 0; k < st.chars.length; k++) {
+          st.chars[k].classList.add('on');
+          place(st.chars[k]);
+          await wait(16);                       // fast machine output
+        }
+        await wait(140);
+      }
+    }
+    finish();
+  }
+
+  run();
+})();
+</script>
+</body>
+</html>
