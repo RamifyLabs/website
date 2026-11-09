@@ -83,7 +83,7 @@
     <p data-line="cmd" class="gap"><span class="prompt" aria-hidden="true">$ </span>ramify --network</p>
     <p data-line="out">Combine knowledge with partners without revealing it;</p>
     <p data-line="out">share in the insights none of you could realize alone.</p>
-    <p data-line="cmd" class="gap"><span class="prompt" aria-hidden="true">$ </span><a href="mailto:contact@ramifylabs.com">mail contact@ramifylabs.com</a><span class="cursor"></span></p>
+    <p data-line="cmd" class="gap"><span class="prompt" aria-hidden="true">$ </span>mail <a href="mailto:contact@ramifylabs.com">contact@ramifylabs.com</a><span class="cursor"></span></p>
   </div>
 </main>
 <script>
@@ -157,23 +157,23 @@
       }
       if (st.kind === 'cmd') {
         cursor.classList.remove('solid');
-        await wait(900);                       // a beat at the prompt before typing
+        await wait(350);                       // a beat at the prompt before typing
         cursor.classList.add('solid', 'moving');
         for (var c = 0; c < st.chars.length; c++) {
           st.chars[c].classList.add('on');
           place(st.chars[c]);
-          await wait(80 + Math.random() * 110); // human typing cadence
+          await wait(35 + Math.random() * 40);  // human typing cadence
         }
         cursor.classList.remove('solid');
-        await wait(420);                        // "enter"
+        await wait(200);                        // "enter"
         cursor.classList.add('solid');
       } else if (st.kind === 'out') {
         for (var k = 0; k < st.chars.length; k++) {
           st.chars[k].classList.add('on');
           place(st.chars[k]);
-          await wait(16);                       // fast machine output
+          await wait(6);                        // fast machine output
         }
-        await wait(140);
+        await wait(60);
       }
     }
     finish();
