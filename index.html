@@ -157,23 +157,23 @@
       }
       if (st.kind === 'cmd') {
         cursor.classList.remove('solid');
-        await wait(350);                       // a beat at the prompt before typing
+        await wait(250);                       // a beat at the prompt before typing
         cursor.classList.add('solid', 'moving');
         for (var c = 0; c < st.chars.length; c++) {
           st.chars[c].classList.add('on');
           place(st.chars[c]);
-          await wait(35 + Math.random() * 40);  // human typing cadence
+          await wait(20 + Math.random() * 20);  // human typing cadence
         }
         cursor.classList.remove('solid');
-        await wait(200);                        // "enter"
+        await wait(150);                        // "enter"
         cursor.classList.add('solid');
       } else if (st.kind === 'out') {
         for (var k = 0; k < st.chars.length; k++) {
           st.chars[k].classList.add('on');
           place(st.chars[k]);
-          await wait(6);                        // fast machine output
+          await wait(22);                       // machine output
         }
-        await wait(60);
+        await wait(150);
       }
     }
     finish();
